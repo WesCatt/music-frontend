@@ -36,7 +36,7 @@ const Login = () => {
 
     useEffect(() => {
         if (!user) return;
-        navigate('/');
+        navigate('/', {replace: true});
     }, [navigate, user]);
 
 
