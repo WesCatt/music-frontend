@@ -7,7 +7,7 @@ const Login = () => {
     const handleSubmit = (data: LoginFormData) => {
         return new Promise<void>(resolve => {
             login(data).then(res => {
-
+                console.log(res);
             }).finally(() => {
                 resolve();
             })

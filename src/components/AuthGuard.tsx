@@ -1,9 +1,10 @@
 import {type ReactNode, useEffect} from "react";
 import {useSelector} from "react-redux";
 import {useLocation, useNavigate} from "react-router";
+import type {RootState} from "@/common/store";
 
 export const AuthGuard = ({children, role = 'USER'}: { children: ReactNode, role: "ADMIN" | "USER" }) => {
-    const user = useSelector(state => state.auth.value);
+    const user = useSelector((state: RootState) => state.auth.value);
     const path = useLocation();
 
     const navigate = useNavigate();

@@ -2,10 +2,12 @@ import {PrevHisBtn} from "@/components/histroy-btn";
 import {Input} from "@/components/ui/input";
 import {Avatar} from "@/components/ui/avatar";
 import {useSelector} from "react-redux";
+import type {RootState} from "@/common/store";
 
 export const Header = () => {
-    const user = useSelector(state => state.auth.value);
-
+    const user = useSelector((state: RootState) => state.auth.value);
+    console.log(user);
+    
     return (
         <header className='p-4 flex items-center gap-10 justify-between'>
             <div className="flex items-center gap-10 w-full">
