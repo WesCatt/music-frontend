@@ -1,6 +1,6 @@
 'use client'
 
-import {clearAuth, getProfile, saveAuth} from "@/common/utils/auth";
+import {clearAuth, getProfile, saveAuth} from "@/utils/auth";
 import {createSlice} from '@reduxjs/toolkit'
 
 export const authSlice = createSlice({
