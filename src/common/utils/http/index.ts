@@ -1,8 +1,10 @@
 import axios from 'axios';
-import {getToken} from "@/common/utils/auth";
+import {clearAuth, getToken} from "@/common/utils/auth.ts";
 
+
+export const baseURL = import.meta.env.DEV ? import.meta.env.VITE_DEV_API_URL : import.meta.env.VITE_PRO_API_URL
 const api = axios.create({
-    baseURL: import.meta.env.DEV ? import.meta.env.VITE_DEV_API_URL : import.meta.env.VITE_PRO_API_URL
+    baseURL,
 });
 
 
@@ -16,6 +18,9 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(res => {
     return res.data;
 }, (err) => {
+    if (err.status === 401) {
+        clearAuth();
+    }
     return Promise.reject(err);
 })
 
