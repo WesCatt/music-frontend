@@ -1,4 +1,5 @@
 import api, {baseURL} from "@/common/utils/http/index.ts";
+
 function joinPath(name: string, path: string) {
     if (path[0] === '/') path = path.slice(1);
     if (name[name.length - 1] === '/') name = name.slice(0, -1);
@@ -12,7 +13,7 @@ function joinPath(name: string, path: string) {
 export function createApi(name: string) {
 
     return {
-        get: (path: string, opt:any) =>
+        get: (path: string, opt?: any) =>
             api.get(joinPath(name, path), opt),
         post: (path: string, opt?: any, config?: any) =>
             api.post(joinPath(name, path), opt, config),
