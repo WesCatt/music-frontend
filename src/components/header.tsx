@@ -6,8 +6,6 @@ import type {RootState} from "@/common/store";
 
 export const Header = () => {
     const user = useSelector((state: RootState) => state.auth.value);
-    console.log(user);
-    
     return (
         <header className='p-4 flex items-center gap-10 justify-between'>
             <div className="flex items-center gap-10 w-full">

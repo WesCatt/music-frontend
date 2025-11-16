@@ -1,18 +1,43 @@
 import {LoginForm} from "@/views/login/components/login-form.tsx";
 import type {LoginFormData} from "@/common/schema/login.schema.ts";
 import {login} from "@/common/api/auth.ts";
+import {save} from '@/common/store/authSlice.ts'
+import {useDispatch, useSelector} from "react-redux";
+import {toast} from "sonner";
+import {formatDate} from "@/common/utils/tools.ts";
+import type {RootState} from "@/common/store";
+import {useEffect} from "react";
+import {useNavigate} from "react-router";
 
 const Login = () => {
+    const user = useSelector((state: RootState) => state.auth.value);
+    const navigate = useNavigate();
+
+    const dispatch = useDispatch();
 
     const handleSubmit = (data: LoginFormData) => {
         return new Promise<void>(resolve => {
             login(data).then(res => {
-                console.log(res);
+                dispatch(save(res.data));
+                toast("登陆成功！", {
+                    description: `${formatDate(new Date())}`,
+                    position: "top-center",
+                    action: {
+                        label: "知晓",
+                        onClick: () => console.log("知晓"),
+                    },
+                });
             }).finally(() => {
                 resolve();
             })
         });
     }
+
+
+    useEffect(() => {
+        if (!user) return;
+        navigate('/');
+    }, [navigate, user]);
 
 
     return (
