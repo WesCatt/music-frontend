@@ -12,8 +12,9 @@ import placeholder from '@/assets/GroovySittingDoodle.png'
 import {useForm} from "react-hook-form";
 import {type LoginFormData, loginSchema} from "@/common/schema/login.schema.ts";
 import {zodResolver} from '@hookform/resolvers/zod';
-import {Spinner} from "@/components/ui/spinner.tsx";
-
+import {Spinner} from "@/components/ui/spinner";
+import {FieldSeparator} from '@/components/ui/field'
+import GoogleLoginBtn from "@/views/login/components/google-login-btn.tsx";
 
 interface LoginFormProps {
     className?: string;
@@ -31,6 +32,13 @@ export function LoginForm({
         resolver: zodResolver(loginSchema)
     });
 
+
+
+    const handleLoginByOauth=(code,type='GOOGLE')=>{
+        console.log(code,type);
+    }
+
+
     return (
         <div className={cn("flex flex-col gap-6", className)} {...props}>
             <Card className="overflow-hidden p-0">
@@ -40,11 +48,11 @@ export function LoginForm({
                             <div className="flex flex-col items-center gap-2 text-center">
                                 <h1 className="text-2xl font-bold">欢迎回来</h1>
                                 <p className="text-muted-foreground text-balance">
-                                    登录WesCatt的音频小站
+                                    登录WesCatt Music
                                 </p>
                             </div>
                             <Field>
-                                <FieldLabel htmlFor="email">邮箱</FieldLabel>
+                                <FieldLabel htmlFor="email">邮箱 <span className='text-red-500'>*</span></FieldLabel>
                                 <Input
                                     id="email"
                                     type="email"
@@ -56,7 +64,8 @@ export function LoginForm({
                             </Field>
                             <Field>
                                 <div className="flex items-center">
-                                    <FieldLabel htmlFor="password">密码</FieldLabel>
+                                    <FieldLabel htmlFor="password">密码 <span
+                                        className='text-red-500'>*</span></FieldLabel>
                                     <a
                                         href="#"
                                         className="ml-auto text-[10px] text-sm underline-offset-2 hover:underline"
@@ -77,9 +86,15 @@ export function LoginForm({
                                     }
                                 </Button>
                             </Field>
-                            <FieldDescription className="text-center">
-                                还没有账号？ <a href="mailto:zzxcmdyx@163.com">请联系管理员！</a>
-                            </FieldDescription>
+                            <FieldSeparator className={"!bg-transparent"}>Or continue with</FieldSeparator>
+                            <div className='flex flex-col gap-4'>
+                                <div className='flex items-center justify-center'>
+                                    <GoogleLoginBtn onLogin={handleLoginByOauth}/>
+                                </div>
+                                <FieldDescription className="text-center">
+                                    还没有账号？ <a href="mailto:zzxcmdyx@163.com">请联系管理员！</a>
+                                </FieldDescription>
+                            </div>
                         </FieldGroup>
                     </form>
                     <div className="bg-muted relative hidden md:block">

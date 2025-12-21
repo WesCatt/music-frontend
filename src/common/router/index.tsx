@@ -1,6 +1,6 @@
 import {createBrowserRouter} from "react-router";
 import {lazy} from "react";
-import {AuthGuard} from "@/components/AuthGuard.tsx";
+import {AuthGuard} from "@/components/auth-guard.tsx";
 
 const BaseLayout = lazy(() => import("@/common/layouts/base-layout.tsx"))
 const Recommend = lazy(() => import('@/views'))

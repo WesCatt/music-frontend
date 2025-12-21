@@ -1,6 +1,5 @@
 import {PrevHisBtn} from "@/components/histroy-btn";
 import {Input} from "@/components/ui/input";
-import {Avatar} from "@/components/ui/avatar";
 import {useSelector} from "react-redux";
 import type {RootState} from "@/common/store";
 
@@ -17,7 +16,6 @@ export const Header = () => {
                     <Input type='search' placeholder="搜索音乐/视频" className="max-w-[300px] w-full"/>
                 </form>
             </div>
-            <Avatar></Avatar>
         </header>
     )
 }
