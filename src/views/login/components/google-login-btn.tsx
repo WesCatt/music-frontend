@@ -2,7 +2,7 @@ import {FaGoogle} from "react-icons/fa";
 import {useGoogleLogin} from "@react-oauth/google";
 
 interface GoogleLoginBtnProps {
-    onLogin: () => void;
+    onLogin: (code: string, type: string) => void;
 }
 
 const GoogleLoginBtn = (props: GoogleLoginBtnProps) => {
@@ -10,7 +10,7 @@ const GoogleLoginBtn = (props: GoogleLoginBtnProps) => {
     const {onLogin} = props;
 
     const login = useGoogleLogin({
-        onSuccess: tokenResponse => onLogin(tokenResponse?.code,'GOOGLE'),
+        onSuccess: tokenResponse => onLogin(tokenResponse?.code, 'GOOGLE'),
         flow: 'auth-code',
     });
 

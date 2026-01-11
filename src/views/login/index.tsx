@@ -15,9 +15,12 @@ const Login = () => {
 
     const dispatch = useDispatch();
 
+    // 处理登录逻辑
     const handleSubmit = (data: LoginFormData) => {
+        // 返回Promise
         return new Promise<void>(resolve => {
             login(data).then(res => {
+                // 保存用户信息
                 dispatch(save(res.data));
                 toast("登陆成功！", {
                     description: `${formatDate(new Date())}`,
@@ -33,6 +36,10 @@ const Login = () => {
         });
     }
 
+    const handleGoogleLogin = (code: string, type = 'GOOGLE') => {
+        console.log(code, type);
+    }
+
 
     useEffect(() => {
         if (!user) return;
@@ -43,7 +50,7 @@ const Login = () => {
     return (
         <div className=" flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
             <div className="w-full max-w-sm opacity-90  md:max-w-4xl relative z-20">
-                <LoginForm onSubmit={handleSubmit}/>
+                <LoginForm onGoogleLogin={handleGoogleLogin} onSubmit={handleSubmit}/>
             </div>
         </div>
     )

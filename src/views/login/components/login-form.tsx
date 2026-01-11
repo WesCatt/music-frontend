@@ -18,12 +18,14 @@ import GoogleLoginBtn from "@/views/login/components/google-login-btn.tsx";
 
 interface LoginFormProps {
     className?: string;
-    onSubmit: (data: LoginFormData) => void
+    onSubmit: (data: LoginFormData) => void;
+    onGoogleLogin: (code: string) => void;
 }
 
 export function LoginForm({
                               className,
                               onSubmit,
+                              onGoogleLogin,
                               ...props
                           }: LoginFormProps) {
 
@@ -31,12 +33,6 @@ export function LoginForm({
     const {register, handleSubmit, formState: {errors, isSubmitting}} = useForm<LoginFormData>({
         resolver: zodResolver(loginSchema)
     });
-
-
-
-    const handleLoginByOauth=(code,type='GOOGLE')=>{
-        console.log(code,type);
-    }
 
 
     return (
@@ -86,10 +82,10 @@ export function LoginForm({
                                     }
                                 </Button>
                             </Field>
-                            <FieldSeparator className={"!bg-transparent"}>Or continue with</FieldSeparator>
+                            <FieldSeparator className={"!bg-transparent"}>或者使用第三方登录</FieldSeparator>
                             <div className='flex flex-col gap-4'>
                                 <div className='flex items-center justify-center'>
-                                    <GoogleLoginBtn onLogin={handleLoginByOauth}/>
+                                    <GoogleLoginBtn onLogin={onGoogleLogin}/>
                                 </div>
                                 <FieldDescription className="text-center">
                                     还没有账号？ <a href="mailto:zzxcmdyx@163.com">请联系管理员！</a>
@@ -101,7 +97,8 @@ export function LoginForm({
                         <img
                             src={placeholder}
                             alt="Image"
-                            className="absolute inset-0 h-full w-full object-cover  dark:grayscale"
+                            style={{ objectPosition: '100% 20%' }}
+                            className="absolute   inset-0 h-full w-full object-cover  dark:grayscale"
                         />
                     </div>
                 </CardContent>
